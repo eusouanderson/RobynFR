@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgresDB
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: python -m RobynScanIQ.app
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/postgresDB
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672//
+    ports:
+      - '8080:8080'
+      - '5455:5455'
+    volumes:
+      - ./backend:/workspace
+
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: celery -A RobynScanIQ.tasks.tasks worker --loglevel=info
+    depends_on:
+      - rabbitmq
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:password@postgres:5432/postgresDB
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672//
+    volumes:
+      - ./backend:/workspace
+
+volumes:
+  pgdata:
