@@ -20,3 +20,7 @@ Comando: task alembic_downgrade
 Desfaz a última migração que foi aplicada ao banco de dados.
 
 celery -A RobynScanIQ.tasks.tasks worker --loglevel=info
+
+curl -X POST http://localhost:8080/documents \
+ -H "Content-Type: multipart/form-data" \
+ -F "file=@exemplo.pdf"

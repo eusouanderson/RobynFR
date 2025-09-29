@@ -74,3 +74,7 @@ dev = "python -m robyn RobynScanIQ/app.py --dev --log-level INFO"
 
 # Produção
 start_prod = "python RobynScanIQ/app.py --workers 4 --processes 1 --log-level INFO"
+
+
+# seed
+seed = "python seeds/seed_documents.py"
