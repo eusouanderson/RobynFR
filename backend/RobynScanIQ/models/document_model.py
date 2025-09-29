@@ -18,3 +18,18 @@ class Document(Base):
         DateTime(timezone=True),
         server_default=text('NOW()'),
     )
+
+    def to_dict(self) -> dict:
+        """Converte o objeto em dict serializável para JSON."""
+        created_at_value = (
+            self.created_at.isoformat()
+            if hasattr(self.created_at, 'isoformat')
+            else self.created_at
+        )
+
+        return {
+            'id': self.id,
+            'file_name': self.file_name,
+            'text_content': self.text_content,
+            'created_at': created_at_value,
+        }
