@@ -9,7 +9,6 @@ GET {{baseUrl}}/health
 ### List Documents
 GET {{baseUrl}}/documents
 
-
 #### Get IA
 GET {{baseUrl}}/ia/responses
 

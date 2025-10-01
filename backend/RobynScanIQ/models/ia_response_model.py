@@ -14,7 +14,9 @@ class IAResponse(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     question: Mapped[str] = mapped_column(String, nullable=False)
     answer: Mapped[str] = mapped_column(Text, nullable=False)
-    document_id: Mapped[int] = mapped_column(Integer, ForeignKey('documents.id'), nullable=False)
+    document_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey('documents.id'), nullable=False
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=text('NOW()'),

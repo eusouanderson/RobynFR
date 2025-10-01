@@ -1,10 +1,10 @@
+from RobynScanIQ.database.postgres import get_db
 from RobynScanIQ.database.repository import (
-    get_ia_response_by_id,
     get_all_ia_responses,
+    get_ia_response_by_id,
 )
 from RobynScanIQ.models.ia_response_model import IAResponse
 from RobynScanIQ.tasks.tasks import answer_question_task
-from RobynScanIQ.database.postgres import get_db
 
 
 async def ask_question_and_save(doc_id: int, question: str):
@@ -19,7 +19,7 @@ async def ask_question_and_save(doc_id: int, question: str):
 
 def list_ia_responses() -> list[IAResponse]:
     """Lista todas as respostas de IA do banco/cache."""
-    db = next(get_db())  
+    db = next(get_db())
     try:
         return get_all_ia_responses(db)
     finally:

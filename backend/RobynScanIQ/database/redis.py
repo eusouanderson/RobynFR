@@ -7,7 +7,7 @@ from RobynScanIQ.config.env import settings
 
 
 class RedisConnection:
-    DEFAULT_TTL = 60
+    DEFAULT_TTL = 1
 
     def __init__(self):
         self.connection: Redis | None = None

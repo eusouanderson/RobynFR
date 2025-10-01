@@ -1,12 +1,13 @@
 from http import HTTPStatus
+
 from robyn import Request
 
 from RobynScanIQ.database.postgres import get_db
 from RobynScanIQ.helper.response_json import json_response
 from RobynScanIQ.services.ia_response_service import (
     ask_question_and_save,
-    list_ia_responses,
     get_ia_response,
+    list_ia_responses,
 )
 
 
@@ -29,7 +30,10 @@ async def question_ia(request: Request):
 
     task_id = await ask_question_and_save(doc_id, question)
     return json_response(
-        {'message': 'Pergunta enviada para processamento.', 'task_id': task_id},
+        {
+            'message': 'Pergunta enviada para processamento.',
+            'task_id': task_id,
+        },
         status=HTTPStatus.ACCEPTED,
     )
 
@@ -40,8 +44,7 @@ async def get_all_ia_responses():
     for db in get_db():
         responses = list_ia_responses(db)
         responses_list = [
-            r.to_dict() if hasattr(r, 'to_dict') else r
-            for r in responses
+            r.to_dict() if hasattr(r, 'to_dict') else r for r in responses
         ]
     return json_response(
         {'ia_responses': responses_list},
