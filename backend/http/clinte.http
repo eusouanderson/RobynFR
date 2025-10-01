@@ -1,5 +1,17 @@
 # Variables
 
 @baseUrl = http://localhost:8080
+@iaId = 1
 
+# Health Check
+GET {{baseUrl}}/health
+
+### List Documents
 GET {{baseUrl}}/documents
+
+
+#### Get IA
+GET {{baseUrl}}/ia/responses
+
+###
+GET {{baseUrl}}/ia/responses/{{iaId}}

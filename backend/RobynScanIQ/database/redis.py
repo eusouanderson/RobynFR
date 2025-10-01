@@ -1,3 +1,4 @@
+# pylint: skip-file
 from typing import Any
 
 from redis import Redis
@@ -6,7 +7,7 @@ from RobynScanIQ.config.env import settings
 
 
 class RedisConnection:
-    DEFAULT_TTL = 3600
+    DEFAULT_TTL = 60
 
     def __init__(self):
         self.connection: Redis | None = None

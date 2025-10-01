@@ -6,9 +6,9 @@ from sqlalchemy.orm import Session
 
 from RobynScanIQ.config.env import settings
 from RobynScanIQ.database.postgres import SessionLocal
+from RobynScanIQ.helper.rag import answer_question
 from RobynScanIQ.models.document_model import Document
 from RobynScanIQ.services.ocr_service import extract_text
-from RobynScanIQ.services.rag_service import answer_question
 
 redis_url = (
     f'redis://'

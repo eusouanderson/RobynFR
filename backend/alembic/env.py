@@ -8,6 +8,7 @@ from RobynScanIQ.database.postgres import Base
 
 
 from RobynScanIQ.models.document_model import Document
+from RobynScanIQ.models.ia_response_model import IAResponse
 
 # Alembic Config object
 config = context.config
