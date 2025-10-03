@@ -39,7 +39,7 @@ class RedisConnection:
     def get(self, key: str) -> str | None:
         """Recupera o valor de uma chave."""
         redis_client = self.connect()
-        return redis_client.get(key)
+        return redis_client.get(key)  # type: ignore
 
     def delete(self, key: str):
         """Deleta uma chave do Redis."""

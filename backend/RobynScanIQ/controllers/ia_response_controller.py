@@ -64,7 +64,7 @@ async def get_ia_response_by_id_controller(request: Request):
 
     response_data = None
     for db in get_db():
-        response_data = get_ia_response(db, response_id)
+        response_data = get_ia_response(db, response_id)  # type: ignore
 
     if not response_data:
         return json_response(

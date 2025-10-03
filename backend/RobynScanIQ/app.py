@@ -1,10 +1,13 @@
 # main.py
-from robyn import Robyn
+from robyn import ALLOW_CORS, Robyn
 
 from RobynScanIQ.config.env import settings
 from RobynScanIQ.routes import document_routes, ia_response_routes
 
 app = Robyn(__file__)
+
+
+ALLOW_CORS(app, origins='*')
 
 
 @app.get('/')
